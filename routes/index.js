@@ -115,8 +115,8 @@ router.post('/cash-on-delivery', isSignedIn,checkAuth, [
           var Transport = nodemailer.createTransport({
             service: 'Gmail',
             auth: {
-              user: 'rgaurav0987@gmail.com',
-              pass: 'rathore@gaurav0'
+              user: process.env.gmailID,
+              pass: process.env.GmailPassword
             }
           });
           var mailOptions = {
@@ -190,8 +190,8 @@ router.post("/checkout", isSignedIn,checkAuth, [
           var Transport = nodemailer.createTransport({
             service: 'Gmail',
             auth: {
-              user: 'rgaurav0987@gmail.com',
-              pass: 'rathore@gaurav0'
+              user: process.env.gmailID,
+              pass: process.env.GmailPassword
             }
           });
           var mailOptions = {
