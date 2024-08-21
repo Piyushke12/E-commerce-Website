@@ -18,7 +18,7 @@ router.get('/', function (req, res, next) {
     for (var i = 0; i < docs.length; i += chunksize) {
       productchunks.push(docs.slice(i, i + chunksize));
     }
-    res.render('index', { title: 'Shopping Cart', products: productchunks, popup: popup });
+    res.render('index', { title: 'QuickMart', products: productchunks, popup: popup });
   });
 });
 
@@ -30,7 +30,7 @@ router.post('/search', (req, res, next) => {
     for (var i = 0; i < products.length; i += chunksize) {
       productchunks.push(products.slice(i, i + chunksize));
     }
-    res.render('index', { title: 'Shopping Cart', products: productchunks, popup: popup });
+    res.render('index', { title: 'QuickMart', products: productchunks, popup: popup });
   });
 });
 
@@ -60,7 +60,7 @@ router.get('/shopping-cart', (req, res, next) => {
 });
 
 //checkout page
-router.get('/checkout', isSignedIn,checkAuth, (req, res, next) => {
+router.get('/checkoutcard', isSignedIn,checkAuth, (req, res, next) => {
   if (!req.session.cart) {
     return res.render('shopping-cart', { products: null })
   }
@@ -138,7 +138,7 @@ router.post('/cash-on-delivery', isSignedIn,checkAuth, [
 });
 
 //post checkout
-router.post("/checkout", isSignedIn,checkAuth, [
+router.post('/checkoutcard', isSignedIn,checkAuth, [
   body('name').trim().isLength({min:7}).escape().blacklist(";","/","`","'","*").withMessage('Invalid Username'),
   body('address').trim().isLength({min:15}).escape().blacklist(";","/","`","'","*").withMessage('Invalid Address'),
   body('phone').trim().isLength({max:12}).isNumeric().escape().blacklist(";","/","`","'","*").withMessage('Invalid Phone Number')
