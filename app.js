@@ -15,7 +15,12 @@ dotenv.config({
   path: '../E-commerce-website/.env'
 })
 
-mongoose.connect(process.env.mongoAddress, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(process.env.MONGO_URL, 
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  });
+  
 require('./config/passport');
 var app = express();
 
