@@ -1,7 +1,12 @@
 var Product = require("../models/product");
 
 var mongoose = require("mongoose");
-mongoose.connect("mongodb://127.0.0.1/shopping", { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect("mongodb+srv://piyush:1lgA9BLtRfdmDrAS@cluster-1.sh8nn.mongodb.net/?retryWrites=true&w=majority&appName=Cluster-1", 
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true
+    });
+
 var product = [
     new Product({
         imagePath: "https://cdn.wccftech.com/wp-content/uploads/2020/06/PS5-Reveal.jpg",
