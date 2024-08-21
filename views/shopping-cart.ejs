@@ -24,8 +24,7 @@
       fill="currentColor" xmlns="http://www.w3.org/2000/svg">
       <path fill-rule="evenodd"
         d="M11.354 5.646a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L8 8.293l2.646-2.647a.5.5 0 0 1 .708 0z" />
-      <path fill-rule="evenodd"
-        d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 
+      <path fill-rule="evenodd" d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 
         3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 
         0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
     </svg></a>
@@ -41,9 +40,11 @@
       </li>
       <li class="nav-item active">
         <a class="nav-link" href="/shopping-cart">Shopping Cart
-          <% if(session.cart != undefined && session.cart.totalQty > 0) { %>
-          <span class="badge badge-dark badge-pill"><%= session.cart.totalQty %></span>
-          <% } %>
+          <% if(session.cart !=undefined && session.cart.totalQty> 0) { %>
+            <span class="badge badge-dark badge-pill">
+              <%= session.cart.totalQty %>
+            </span>
+            <% } %>
         </a>
       </li>
       <li class="nav-item dropdown">
@@ -52,100 +53,104 @@
           User Management
         </a>
         <% if(login) {%>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="/user/profile">User Account</a>
-          <a class="dropdown-item" href="/user/logout">Logout</a>
-        </div>
-        <%} else {%>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="/user/login">Log In</a>
-          <a class="dropdown-item" href="/user/signup">Sign Up</a>
-        </div>
-        <%}%>
-        </li>
-      </ul>
-      <form action="/search" method="POST" class="form-inline my-2 my-lg-0 ml-5 w-100">
-        <input class="form-control w-75" type="search" placeholder="Search" name="search" aria-label="Search">
-        <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
-      </form>
-    </div>
-  </nav>
-
-  <% if(hasProducts) {%>
-        <!-- Accordian -->
-        <div id="accordion" class="w-100 text-center">
-          <div class="card">
-            <div class="card-header" id="headingOne">
-              <h5 class="mb-0">
-                <button class="btn btn-primary" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
-                  aria-controls="collapseOne">
-                  Order Items
-                </button>
-              </h5>
-            </div>
-
-            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-              <div class="card-body">
-                <!-- Products -->
-                <div class="row justify-content-center">
-                  <ul class="list-group" style="width: 50%;">
-                    <%  products.forEach(function(product){  %>
-                    <div class="d-flex pt-4 ml-3 mt-3 list-group-item">
-                      <h5><strong><b><%= product.item.title  %> | <%= product.price%></b></strong></h5>
-                      <div class="card pr-4" style="margin-left:40%;">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          Remove
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                          <a class="dropdown-item" href="/removeitem/<%= product.item._id %>">Remove an Item</a>
-                          <a class="dropdown-item" href="/removeall/<%= product.item._id %>">Remove All</a>
-                        </div>
-                      </div>
-                      <span class="badge badge-info badge-pill pt-1 p-1"
-                        style="width:22px; height:22px; margin-top:10px;margin-left:4%;"><%= product.qty  %></span>
-                    </div>
-                    <br>
-                    <% }) %>
-                  </ul>
-                </div>
-                <div class="row">
-                  <div class="container d-flex justify-content-center col-sm-4 col-md-6 col-md-offset-3 col-sm-offset-3"
-                    style="font-size:1.4rem;">
-                    <strong>Total:<%= totalPrice %></strong>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="/user/profile">User Account</a>
+            <a class="dropdown-item" href="/user/logout">Logout</a>
           </div>
-          <div class="card">
-            <div class="card-header" id="headingTwo">
-              <h5 class="mb-0">
-                <button class="btn btn-primary collapsed" data-toggle="collapse" data-target="#collapseTwo"
-                  aria-expanded="false" aria-controls="collapseTwo">
-                  Payment Method
-                </button>
-              </h5>
+          <%} else {%>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="/user/login">Log In</a>
+              <a class="dropdown-item" href="/user/signup">Sign Up</a>
             </div>
-            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-              <div class="text-center w-100" style="font-size: 1.1rem;">
-                  <div class="row justify-content-center">
-                    <p class="pt-3">Cash-on-delivery:</p>
-                      <a class="btn btn-success" href="/cashondelivery">Buy Now</a>
-                    </div>
-                    <div class="row justify-content-center">
-                      <p class="mt-3">Credit/Debit or ATM Card:</p>
-                      <button type="button" class="btn btn-success " disabled>Button</button>
-                      </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <% } else {%>
-        <div class="row justify-content-center m-5">
-          <h2><b>No Items in Cart&#x1F622;</b></h2>
-        </div>
+            <%}%>
+      </li>
+    </ul>
+    <form action="/search" method="POST" class="form-inline my-2 my-lg-0 ml-5 w-100">
+      <input class="form-control w-75" type="search" placeholder="Search" name="search" aria-label="Search">
+      <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+    </form>
   </div>
-  <% } %>
+</nav>
+
+<% if(hasProducts) {%>
+  <!-- Accordian -->
+  <div id="accordion" class="w-100 text-center">
+    <div class="card">
+      <div class="card-header" id="headingOne">
+        <h5 class="mb-0">
+          <button class="btn btn-primary" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
+            aria-controls="collapseOne">
+            Order Items
+          </button>
+        </h5>
+      </div>
+
+      <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+        <div class="card-body">
+          <!-- Products -->
+          <div class="row justify-content-center">
+            <ul class="list-group" style="width: 50%;">
+              <% products.forEach(function(product){ %>
+                <div class="d-flex pt-4 ml-3 mt-3 list-group-item">
+                  <h5><strong><b>
+                        <%= product.item.title %> | <%= product.price%>
+                      </b></strong></h5>
+                  <div class="card pr-4" style="margin-left:40%;">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Remove
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item" href="/removeitem/<%= product.item._id %>">Remove an Item</a>
+                      <a class="dropdown-item" href="/removeall/<%= product.item._id %>">Remove All</a>
+                    </div>
+                  </div>
+                  <span class="badge badge-info badge-pill pt-1 p-1"
+                    style="width:22px; height:22px; margin-top:10px;margin-left:4%;">
+                    <%= product.qty %>
+                  </span>
+                </div>
+                <br>
+                <% }) %>
+            </ul>
+          </div>
+          <div class="row">
+            <div class="container d-flex justify-content-center col-sm-4 col-md-6 col-md-offset-3 col-sm-offset-3"
+              style="font-size:1.4rem;">
+              <strong>Total:<%= totalPrice %></strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header" id="headingTwo">
+        <h5 class="mb-0">
+          <button class="btn btn-primary collapsed" data-toggle="collapse" data-target="#collapseTwo"
+            aria-expanded="false" aria-controls="collapseTwo">
+            Payment Method
+          </button>
+        </h5>
+      </div>
+      <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+        <div class="text-center w-100" style="font-size: 1.1rem;">
+          <div class="row justify-content-center">
+            <p class="pt-3">Cash-on-delivery:</p>
+            <a class="btn btn-success" href="/cashondelivery">Buy Now</a>
+          </div>
+          <div class="row justify-content-center">
+            <p class="pt-3">Credit/Debit Card:</p>
+            <button class="btn btn-success" href="/checkoutcard" disabled>Buy Now</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <% } else {%>
+    <div class="row justify-content-center m-5">
+      <h2><b>No Items in Cart&#x1F622;</b></h2>
+    </div>
+    </div>
+    <% } %>
