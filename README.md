@@ -1,7 +1,7 @@
 ****E-commerce Website****
 Welcome to the E-commerce Website repository! This project is a fully functional e-commerce platform built using modern web technologies. Below you will find all the necessary information to get started with the project, including setup instructions, features, and deployment details.
 
-Deployer app Link - https://quick-mart-zuxy.onrender.com
+Deployed app Link - https://quick-mart-zuxy.onrender.com
 
 **Table of Contents**
 •	Features
